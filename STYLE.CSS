@@ -1,0 +1,504 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a1a;
+    background-image: url('https://www.transparenttextures.com/patterns/egyptian-flat.png');
+}
+.font-cinzel {
+    font-family: 'Cinzel', serif;
+}
+.papyrus-bg {
+    background-color: #fef9e7;
+    border: 15px solid transparent;
+    border-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 H100 V100 H0 Z M5,5 V95 H95 V5 Z" fill="%23c0a16b"/><path d="M10,10 H90 V90 H10 Z M15,15 V85 H85 V15 Z" fill="%23ab8d5a"/><path d="M20,20 H80 V80 H20 Z M25,25 V75 H75 V25 Z" fill="%23967949"/><path d="M30,30 H70 V70 H30 Z M35,35 V65 H65 V35 Z" fill="%23816538"/><path d="M40,40 H60 V60 H40 Z M45,45 V55 H55 V45 Z" fill="%236c5127"/></svg>') 30 round;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.detective-btn {
+    background-color: #4a3a2a;
+    color: #fef9e7;
+    transition: all 0.3s ease;
+    border: 2px solid #c0a16b;
+}
+.detective-btn:hover {
+    background-color: #c0a16b;
+    color: #4a3a2a;
+}
+.detective-btn:disabled {
+    background-color: #9d9d9c;
+    cursor: not-allowed;
+    border-color: #777;
+}
+.choice-option {
+    border: 2px solid #c0a16b;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.choice-option:hover {
+    background-color: #fdf2d0;
+    transform: translateY(-2px);
+}
+.choice-option.selected {
+    background-color: #c0a16b;
+    color: white;
+    border-color: #4a3a2a;
+}
+.feedback {
+    transition: opacity 0.5s ease-in-out;
+}
+.sequence-item {
+    cursor: grab;
+    user-select: none;
+}
+/* Drag and drop visual feedback */
+.sequence-item.opacity-50 {
+    opacity: 0.5;
+}
+.sequence-item.border-dashed {
+    border-style: dashed;
+}
+.sequence-item.bg-yellow-100 {
+    background-color: #fefcbf; /* Tailwind yellow-100 */
+}
+.hieroglyph-input, .riddle-input, .fill-in-blank-input {
+    width: 80px; /* Wider for numbers/words */
+    height: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 2px solid #c0a16b;
+    background-color: #fffbf0;
+    border-radius: 0.375rem; /* rounded-md */
+}
+/* Numerical sequence specific styles */
+.numerical-sequence-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid #c0a16b;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+.numerical-sequence-item .number-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.numerical-sequence-item .number-display {
+    font-size: 1.4rem;
+    font-weight: bold;
+    min-width: 30px;
+    text-align: center;
+}
+.numerical-sequence-item .num-btn {
+    background-color: #4a3a2a;
+    color: #fef9e7;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.numerical-sequence-item .num-btn:hover {
+    background-color: #c0a16b;
+}
+.numerical-sequence-item .num-btn:disabled {
+    background-color: #9d9d9c;
+    cursor: not-allowed;
+}
+
+/* Chat styles (similar to messaging apps) */
+.chat-window {
+    height: 400px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chat-message-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.chat-message-row.user {
+    flex-direction: row-reverse;
+}
+
+.chat-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 2px solid #c0a16b;
+}
+
+.chat-bubble {
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.chat-bubble-user {
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+.chat-bubble-cleo {
+    background-color: #e2e2e2;
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+.chat-bubble-cleo.thinking::after {
+    content: '...';
+    display: inline-block;
+    animation: typing 1s steps(3, end) infinite;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 1.2em; }
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #e0d8c7;
+    align-items: center;
+}
+.chat-input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    background-color: #f9f9f9;
+}
+.chat-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+.send-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.send-btn:hover {
+    background-color: #0056b3;
+}
+.send-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Millionaire Game Specific Styles */
+.millionaire-option-btn {
+    background-color: #c0a16b; /* Gold-like */
+    color: #4a3a2a; /* Dark text */
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.millionaire-option-btn:hover:not(:disabled) {
+    background-color: #ab8d5a;
+    transform: translateY(-2px);
+}
+.millionaire-option-btn:disabled {
+    background-color: #e0e0e0;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+.millionaire-option-btn.correct {
+    background-color: #28a745; /* Green for correct */
+    color: white;
+}
+.millionaire-option-btn.incorrect {
+    background-color: #dc3545; /* Red for incorrect */
+    color: white;
+}
+.millionaire-option-label {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #4a3a2a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.lifeline-btn {
+    background-color: #816538; /* Darker gold */
+    color: #fef9e7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    border: 1px solid #c0a16b;
+}
+.lifeline-btn:hover:not(:disabled) {
+    background-color: #6c5127;
+}
+.lifeline-btn:disabled {
+    background-color: #9d9d9c;
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: #777;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #fef9e7;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 5px solid #c0a16b;
+}
+.modal-close-btn {
+    background-color: #4a3a2a;
+    color: #fef9e7;
+    padding: 8px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.modal-close-btn:hover {
+    background-color: #c0a16b;
+    color: #4a3a2a;
+}
+
+/* Highlighted word style for Millionaire game */
+#question-display b {
+    color: #dc3545; /* Red color for highlighted word */
+    font-weight: bold;
+}
+
+/* Badge display area */
+#all-badges-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem; /* gap-3 */
+    margin-top: 1.5rem; /* mt-6 */
+    padding-top: 1rem;
+    border-top: 2px solid #c0a16b;
+}
+#all-badges-display .badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 6rem; /* fixed width for consistent layout */
+    transition: all 0.3s ease-in-out;
+    cursor: help; /* Indicates it's not yet unlocked */
+}
+#all-badges-display .badge-item img {
+    width: 4rem; /* w-16 */
+    height: 4rem; /* h-16 */
+    border-radius: 9999px; /* rounded-full */
+    border: 3px solid #c0a16b; /* border-gold */
+    margin-bottom: 0.25rem; /* mb-1 */
+    filter: grayscale(100%) brightness(50%); /* Locked state */
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+}
+#all-badges-display .badge-item span {
+    font-size: 0.875rem; /* text-sm */
+    color: #4a3a2a;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Unlocked Badge State */
+#all-badges-display .badge-item.unlocked img {
+    filter: grayscale(0%) brightness(100%); /* Unlocked state */
+    opacity: 1;
+    border-color: #FACC15; /* Brighter gold for unlocked */
+}
+#all-badges-display .badge-item.unlocked {
+    cursor: default;
+}
+
+/* Reading Speed specific styles */
+#reading-speed-word {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem; /* Larger font for readability */
+    font-weight: bold;
+    color: #4a3a2a;
+    margin-bottom: 2rem;
+    min-height: 4rem; /* Ensure consistent height */
+}
+
+/* Activity Selection Options */
+.activity-option {
+    background-color: #fffbf0;
+    border: 3px solid #c0a16b;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 150px; /* Ensure consistent height */
+    padding: 1rem;
+    position: relative; /* For absolute positioning of checkbox */
+}
+.activity-option:hover {
+    background-color: #fdf2d0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+.activity-option.selected {
+    background-color: #c0a16b;
+    color: white;
+    border-color: #4a3a2a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.activity-option.selected span,
+.activity-option.selected p {
+    color: white;
+}
+
+.activity-checkbox {
+    position: absolute;
+    top: 0.75rem; /* pt-3 */
+    right: 0.75rem; /* pr-3 */
+    width: 28px;
+    height: 28px;
+    border: 2px solid #4a3a2a;
+    border-radius: 50%;
+    background-color: #fef9e7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: transparent; /* Hide checkmark initially */
+    transition: all 0.2s ease;
+}
+
+.activity-option.selected .activity-checkbox {
+    background-color: #28a745; /* Green for selected */
+    border-color: #28a745;
+    color: white; /* Show checkmark */
+}
+.activity-checkbox::after {
+    content: '✔'; /* Checkmark symbol */
+    font-family: sans-serif; /* Ensure it's a standard checkmark */
+    line-height: 1;
+}
+
+/* Comparison table styles */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+.comparison-table th, .comparison-table td {
+    border: 1px solid #c0a16b;
+    padding: 0.75rem;
+    text-align: left;
+}
+.comparison-table th {
+    background-color: #c0a16b;
+    color: #4a3a2a;
+    font-weight: bold;
+}
+.comparison-table tr:nth-child(even) {
+    background-color: #fdf2d0;
+}
+.comparison-table .highlight-row {
+    background-color: #FFD700; /* Gold highlight */
+    font-weight: bold;
+    color: #4a3a2a;
+}
+
+/* Nile Runner Game specific styles */
+#nile-runner-canvas {
+    background-color: #87CEEB; /* Nile blue */
+    border: 2px solid #4a3a2a;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px; /* Max width for larger screens */
+    height: 300px; /* Fixed height for game area */
+}
+#nile-runner-game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+#nile-runner-score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a3a2a;
+    margin-bottom: 1rem;
+}
+#nile-runner-game-over {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #dc3545;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 1rem;
+    display: none; /* Hidden by default */
+}
+#nile-runner-restart-btn {
+    margin-top: 1rem;
+}
+#nile-legend-display {
+    font-size: 1rem;
+    color: #4a3a2a;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}

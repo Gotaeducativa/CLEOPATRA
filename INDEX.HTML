@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Enigma de Cleopatra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> </head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="start-screen" class="w-full max-w-md mx-auto papyrus-bg rounded-lg p-8 text-[#4a3a2a] flex flex-col items-center justify-center text-center">
+        <h1 class="font-cinzel text-3xl md:text-4xl font-bold tracking-wider mb-6">Bienvenido, Joven Detective</h1>
+        <p class="text-lg leading-relaxed mb-8">Antes de comenzar tu gran aventura en el antiguo Egipto, dime, ¿cuál es tu nombre?</p>
+        <input type="text" id="student-name-input" placeholder="Tu nombre aquí" class="w-full p-3 mb-6 rounded-md border-2 border-[#c0a16b] bg-[#fffbf0] text-[#4a3a2a] text-lg text-center focus:outline-none focus:ring-2 focus:ring-[#4a3a2a]">
+        <button id="submit-name-btn" class="detective-btn font-cinzel font-bold py-3 px-10 rounded-lg text-xl">Continuar</button>
+        <div id="start-feedback-area" class="mt-4 text-center font-bold text-lg h-8 feedback opacity-0"></div>
+    </div>
+
+    <div id="activity-selection-screen" class="w-full max-w-xl mx-auto papyrus-bg rounded-lg p-8 text-[#4a3a2a] flex flex-col items-center justify-center text-center hidden">
+        <h2 class="font-cinzel text-3xl md:text-4xl font-bold tracking-wider mb-6">¡Hola, <span id="display-student-name">Detective</span>!</h2>
+        <p class="text-lg leading-relaxed mb-8">¿Qué camino deseas seguir hoy en el antiguo Egipto?</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-lg">
+            <div id="option-reading" class="activity-option p-4 rounded-xl cursor-pointer relative transition-all duration-200 ease-in-out" data-path-type="reading">
+                <div class="activity-checkbox"></div>
+                <span class="font-cinzel text-xl font-bold">Lectura</span>
+                <p class="text-sm mt-2">Explora la historia y los enigmas de Cleopatra.</p>
+            </div>
+            <div id="option-grammar" class="activity-option p-4 rounded-xl cursor-pointer relative transition-all duration-200 ease-in-out" data-path-type="grammar">
+                <div class="activity-checkbox"></div>
+                <span class="font-cinzel text-xl font-bold">Gramática</span>
+                <p class="text-sm mt-2">Descifra enigmas y domina el idioma egipcio.</p>
+            </div>
+            <div id="option-reading-speed" class="activity-option p-4 rounded-xl cursor-pointer relative transition-all duration-200 ease-in-out" data-path-type="reading-speed">
+                <div class="activity-checkbox"></div>
+                <span class="font-cinzel text-xl font-bold">Velocidad Lectora</span>
+                <p class="text-sm mt-2">Mejora tu agilidad visual con palabras egipcias.</p>
+            </div>
+            <div id="option-chat" class="activity-option p-4 rounded-xl cursor-pointer relative transition-all duration-200 ease-in-out" data-path-type="chat">
+                <div class="activity-checkbox"></div>
+                <span class="font-cinzel text-xl font-bold">Chat con Cleopatra</span>
+                <p class="text-sm mt-2">Conversa con la Faraona sobre los secretos de Egipto.</p>
+            </div>
+            <div id="option-nile-runner" class="activity-option p-4 rounded-xl cursor-pointer relative transition-all duration-200 ease-in-out" data-path-type="nile-runner">
+                <div class="activity-checkbox"></div>
+                <span class="font-cinzel text-xl font-bold">Juego del Nilo</span>
+                <p class="text-sm mt-2">Navega por el Nilo y esquiva los peligros.</p>
+            </div>
+        </div>
+        <button id="start-selected-activity-btn" class="detective-btn font-cinzel font-bold py-3 px-10 rounded-lg text-xl mt-8" disabled>Comenzar Aventura</button>
+        <div id="activity-selection-feedback" class="mt-4 text-center font-bold text-lg h-8 feedback opacity-0"></div>
+    </div>
+
+    <main id="game-container" class="w-full max-w-4xl mx-auto papyrus-bg rounded-lg p-6 md:p-10 text-[#4a3a2a] hidden relative">
+        
+        <header class="text-center border-b-4 border-[#c0a16b] pb-4 mb-6">
+            <h1 class="font-cinzel text-3xl md:text-5xl font-bold tracking-wider">El Enigma de Cleopatra</h1>
+            <p class="font-cinzel text-lg md:text-xl mt-2">Una Aventura para Jóvenes Detectives</p>
+        </header>
+
+        <div id="content-area">
+            </div>
+
+        <div id="feedback-area" class="mt-4 text-center font-bold text-lg h-8 feedback opacity-0"></div>
+
+        <div id="navigation-area" class="mt-6 flex flex-col items-center">
+             <button id="next-btn" class="detective-btn font-cinzel font-bold py-2 px-8 rounded-lg text-xl">Siguiente Pista</button>
+             <div id="all-badges-display" class="w-full">
+                 </div>
+        </div>
+
+    </main>
+
+    <div id="generic-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-title" class="font-cinzel text-2xl font-bold mb-4"></h3>
+            <p id="modal-message" class="text-lg"></p>
+            <button class="modal-close-btn" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script> </body>
+</html>
