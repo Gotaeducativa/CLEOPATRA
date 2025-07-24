@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Enigma de Cleopatra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div id="start-screen" class="w-full max-w-md mx-auto papyrus-bg rounded-lg p-8 text-[#4a3a2a] flex flex-col items-center justify-center text-center">
+        <h1 class="font-cinzel text-3xl md:text-5xl font-bold tracking-wider">El Enigma de Cleopatra</h1>
+        <p class="font-cinzel text-lg md:text-xl mt-2">Una Aventura para Jóvenes Detectives</p>
+
+        <div class="mt-8 w-full">
+            <label for="student-name-input" class="block text-lg font-cinzel mb-2">Introduce tu nombre de detective:</label>
+            <input type="text" id="student-name-input" class="w-full p-3 rounded-md border-2 border-[#c0a16b] bg-[#fef9e7] text-[#4a3a2a] focus:outline-none focus:border-[#ab8d5a]" placeholder="Ej. Alex Smith">
+            <button id="submit-name-btn" class="detective-btn mt-6" disabled>Comenzar Aventura</button>
+        </div>
+        <div id="activity-selection-feedback" class="mt-4 text-center font-bold text-lg h-8 feedback opacity-0"></div>
+    </div>
+
+    <main id="game-container" class="w-full max-w-4xl mx-auto papyrus-bg rounded-lg p-6 md:p-10 text-[#4a3a2a] hidden relative">
+        
+        <header class="text-center border-b-4 border-[#c0a16b] pb-4 mb-6">
+            <h1 class="font-cinzel text-3xl md:text-5xl font-bold tracking-wider">El Enigma de Cleopatra</h1>
+            <p class="font-cinzel text-lg md:text-xl mt-2">Una Aventura para Jóvenes Detectives</p>
+        </header>
+
+        <div id="content-area">
+            </div>
+
+        <div id="feedback-area" class="mt-4 text-center font-bold text-lg h-8 feedback opacity-0"></div>
+
+        <div id="navigation-area" class="mt-6 flex flex-col items-center">
+             <button id="next-btn" class="detective-btn font-cinzel font-bold py-2 px-8 rounded-lg text-xl">Siguiente Pista</button>
+             <div id="all-badges-display" class="w-full">
+                 </div>
+        </div>
+
+        <div id="chat-activity-container" class="mt-6 hidden">
+            <div id="chat-messages" class="chat-window papyrus-bg-dark rounded-lg p-4 overflow-y-auto h-80 mb-4">
+                </div>
+            <div class="chat-input-container flex gap-2">
+                <input type="text" id="chat-input" class="flex-grow p-3 rounded-lg border-2 border-[#c0a16b] bg-[#fef9e7] text-[#4a3a2a] focus:outline-none" placeholder="Escribe tu mensaje a Cleopatra...">
+                <button id="send-btn" class="detective-btn px-4 py-2">Enviar</button>
+            </div>
+        </div>
+
+        <div id="nile-runner-game-area" class="flex flex-col items-center justify-center gap-4 hidden">
+            <h2 class="font-cinzel text-2xl font-bold">Juego: Corredor del Nilo</h2>
+            <div class="text-lg">Puntuación: <span id="nile-runner-score-display">0</span></div>
+            <canvas id="nile-runner-canvas" width="800" height="300" class="border-2 border-amber-800 bg-blue-300"></canvas>
+            <div class="flex gap-4">
+                <button id="nile-runner-start-btn" class="detective-btn">Comenzar</button>
+                <button id="nile-runner-stop-btn" class="detective-btn hidden">Detener</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="generic-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="papyrus-bg rounded-lg p-6 md:p-8 max-w-sm w-full relative">
+            <button class="modal-close-btn absolute top-2 right-2 text-[#4a3a2a] text-2xl font-bold">&times;</button>
+            <h3 id="modal-title" class="font-cinzel text-2xl font-bold mb-4"></h3>
+            <p id="modal-message" class="text-lg"></p>
+            <button id="modal-confirm-btn" class="detective-btn mt-6 hidden">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

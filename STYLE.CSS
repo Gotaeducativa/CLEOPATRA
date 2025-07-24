@@ -1,0 +1,226 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a1a;
+    background-image: url('https://www.transparenttextures.com/patterns/egyptian-flat.png');
+}
+.font-cinzel {
+    font-family: 'Cinzel', serif;
+}
+.papyrus-bg {
+    background-color: #fef9e7;
+    border: 15px solid transparent;
+    border-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 H100 V100 H0 Z M5,5 V95 H95 V5 Z" fill="%23c0a16b"/><path d="M10,10 H90 V90 H10 Z M15,15 V85 H85 V15 Z" fill="%23ab8d5a"/><path d="M20,20 H80 V80 H20 Z M25,25 V75 H75 V25 Z" fill="%23967949"/><path d="M30,30 H70 V70 H30 Z M35,35 V65 H65 V35 Z" fill="%23816538"/><path d="M40,40 H60 V60 H40 Z M45,45 V55 H55 V45 Z" fill="%236c5127"/></svg>') 15 stretch;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.papyrus-bg-dark {
+    background-color: #e9e0c7; /* Slightly darker papyrus for contrast */
+}
+
+.detective-btn {
+    background-color: #c0a16b;
+    color: #4a3a2a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.detective-btn:hover:not(:disabled) {
+    background-color: #ab8d5a;
+    transform: translateY(-2px);
+}
+.detective-btn:disabled {
+    background-color: #d1d1d1;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.feedback {
+    transition: opacity 0.5s ease-in-out;
+}
+.feedback.show {
+    opacity: 1;
+}
+.feedback.error {
+    color: #cc0000;
+}
+.feedback.success {
+    color: #008800;
+}
+
+/* Specific styles for chat */
+.chat-window {
+    height: 400px;
+    border: 2px solid #c0a16b;
+    overflow-y: auto;
+    background-color: #fcf6e7; /* Light background for chat area */
+}
+
+.chat-message-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.chat-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.chat-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.user-message .chat-bubble {
+    background-color: #c0a16b; /* Gold/brown for user */
+    color: #4a3a2a;
+    border-bottom-right-radius: 5px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.user-message .chat-avatar {
+    order: 2; /* User avatar on the right */
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.model-message .chat-bubble {
+    background-color: #92b0b3; /* Teal/blue for Cleopatra */
+    color: #fff;
+    border-bottom-left-radius: 5px;
+}
+
+.chat-input-container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #c0a16b;
+    background-color: #fef9e7;
+    color: #4a3a2a;
+}
+
+#send-btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #c0a16b;
+    color: #4a3a2a;
+    font-weight: bold;
+    cursor: pointer;
+}
+#send-btn:hover {
+    background-color: #ab8d5a;
+}
+
+.model-message.typing .chat-bubble {
+    background-color: #d3d3d3; /* Light gray for typing indicator */
+    color: #555;
+    font-style: italic;
+}
+
+
+/* Badges styling */
+#all-badges-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #c0a16b;
+}
+
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    opacity: 0.5; /* Default state: not unlocked */
+    filter: grayscale(100%);
+}
+
+.badge-item.unlocked {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Millionaire Game Specific */
+.millionaire-option-btn.disabled-btn {
+    background-color: #d1d1d1;
+    color: #888;
+    cursor: not-allowed;
+    border-color: #aaa;
+}
+
+/* Reading Speed Game Specific */
+#word-display {
+    min-height: 80px; /* Ensure space for word display */
+}
+
+/* Comparison Table Specific */
+.comparison-table {
+    margin-top: 1.5rem;
+}
+.comparison-table th, .comparison-table td {
+    border: 1px solid #c0a16b;
+    padding: 0.75rem;
+    text-align: left;
+}
+.comparison-table th {
+    background-color: #c0a16b;
+    color: #4a3a2a;
+    font-weight: bold;
+}
+.comparison-table tr:nth-child(even) {
+    background-color: #fdf2d0;
+}
+.comparison-table .highlight-row {
+    background-color: #FFD700; /* Gold highlight */
+    font-weight: bold;
+    color: #4a3a2a;
+}
+
+/* Nile Runner Game specific styles */
+#nile-runner-canvas {
+    background-color: #87CEEB; /* Nile blue */
+    border: 2px solid #4a3a2a;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px; /* Max width for larger screens */
+    height: 300px; /* Fixed height for game area */
+}
+#nile-runner-game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* Space between elements */
+}
